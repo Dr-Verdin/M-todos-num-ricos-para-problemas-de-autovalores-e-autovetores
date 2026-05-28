@@ -25,10 +25,12 @@ print("Matriz A:")
 print(A)
 
 q_new = q0
+p = (q_new.T @ A @ q_new).item()
 for k in range(max_iter + 1):
     print(f"=== Iteração {k}: ===")
 
-    w = np.linalg.solve(A, q_new)
+    I = np.eye(n)
+    w = np.linalg.solve(A - p * I, q_new)
     print("\nVetor w:")
     print(w)
 

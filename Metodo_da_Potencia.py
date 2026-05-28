@@ -1,6 +1,6 @@
 import numpy as np
 
-k = int(input("Digite o número máximo de iterações: "));
+max_iter = int(input("Digite o número máximo de iterações: "));
 n = int(input("Digite a ordem da matriz: "));
 
 q0 = np.array(
@@ -12,6 +12,7 @@ print(q0)
 
 if np.linalg.norm(q0, 2) != 1:
     print("O vetor inicial q0 não é unitário.")
+    q0 = q0 / np.linalg.norm(q0, 2)
 
 A = []
 for i in range(n):
@@ -24,7 +25,7 @@ print("Matriz A:")
 print(A)
 
 q_new = q0
-for k in range(k + 1):
+for k in range(max_iter + 1):
     print(f"=== Iteração {k}: ===")
 
     w = A @ q_new
@@ -39,6 +40,6 @@ for k in range(k + 1):
     print(f"\nVetor q_{k+1}:")
     print(q_new)
 
-    autovalor_new = q_new.T @ A @ q_new
+    autovalor_new = (q_new.T @ A @ q_new).item()
     print(f"\nAutovalor aproximado λ_{k+1}:")
     print(autovalor_new)
